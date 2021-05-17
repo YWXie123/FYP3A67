@@ -2,39 +2,10 @@
     <nav>
         <ul class="nav">
             <li class="nav-item">
-                {% if current_user.is_authenticated %}
                 <a href="/home" class="nav-link 
                 {% if index %}active{% endif %}">
                     Home
                 </a>
-                {% endif %}
-            </li>
-
-            <li class="nav-item">
-                {% if not current_user.is_authenticated %}
-                <a href="/login" class="nav-link 
-                {% if index %}active{% endif %}">
-                    Login
-                </a>
-                {% endif %}
-            </li>  
-            
-            <li class="nav-item">
-                {% if not current_user.is_authenticated %}
-                <a href="/signup" class="nav-link 
-                {% if index %}active{% endif %}">
-                    Sign Up
-                </a>
-                {% endif %}
-            </li>
-
-            <li class="nav-item">
-                {% if current_user.is_authenticated %}
-                <a href="/logout" class="nav-link 
-                {% if index %}active{% endif %}">
-                    Logout
-                </a>
-                {% endif %}
             </li>
         </ul>
     </nav>
