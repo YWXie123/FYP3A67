@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form name="frmSignUp" action="/signup" method="post" novalidate>
+            <fieldset class="form-group">
+                <legend>{{title}}</legend>
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.email.label }}<br>
+                    {{ form.email(class_='form-control') }}
+                    {% for error in form.email.errors %}
+                    <span class="error-message">{{ error }}</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.password.label }}<br>
+                    {{ form.password(class_='form-control') }}
+                    {% for error in form.password.errors %}
+                    <span class="error-message">{{ error }}</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.name.label }}<br>
+                    {{ form.name(class_='form-control') }}
+                    {% for error in form.name.errors %}
+                    <span class="error-message">{{ error }}</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.submit(class_='btn btn-primary') }}
+                </p>
+            </fieldset>
+        </form>
+    </div>
+</div>
+{% endblock %}

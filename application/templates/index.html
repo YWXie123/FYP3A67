@@ -1,0 +1,163 @@
+<!-- Inherits from layout.html -->
+{% extends "layout.html" %}
+<!-- The block content replace the one encapsulated in  layout.html -->
+{% block content %}
+<div class="row">
+<div class="col-md-6 offset-md-3">
+<form name="frmPredict" action="/predict" method="post" novalidate>
+    <fieldset class="form-group">
+        <legend>{{title}}</legend>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.age.label }}<br>
+            {{ form.age(class_='form-control') }}
+            {% for error in form.age.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.sex.label }}<br>
+            {{ form.sex(class_='form-control') }}
+            {% for error in form.sex.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.cp.label }}<br>
+            {{ form.cp(class_='form-control') }}
+            {% for error in form.cp.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.trestbps.label }}<br>
+            {{ form.trestbps(class_='form-control') }}
+            {% for error in form.trestbps.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.chol.label }}<br>
+            {{ form.chol(class_='form-control') }}
+            {% for error in form.chol.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.fbs.label }}<br>
+            {{ form.fbs(class_='form-control') }}
+            {% for error in form.fbs.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.restecg.label }}<br>
+            {{ form.restecg(class_='form-control') }}
+            {% for error in form.restecg.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.thalach.label }}<br>
+            {{ form.thalach(class_='form-control') }}
+            {% for error in form.thalach.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.exang.label }}<br>
+            {{ form.exang(class_='form-control') }}
+            {% for error in form.exang.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.oldpeak.label }}<br>
+            {{ form.oldpeak(class_='form-control') }}
+            {% for error in form.oldpeak.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.slope.label }}<br>
+            {{ form.slope(class_='form-control') }}
+            {% for error in form.slope.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.ca.label }}<br>
+            {{ form.ca(class_='form-control') }}
+            {% for error in form.ca.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.thal.label }}<br>
+            {{ form.thal(class_='form-control') }}
+            {% for error in form.thal.errors %}
+            <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.submit(class_='btn btn-primary') }}
+        </p>
+    </fieldset>
+</form>
+</div>
+<hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Age</th>
+                <th>Sex</th>
+                <th>cp</th>
+                <th>trestbps</th>
+                <th>chol</th>
+                <th>fbs</th>
+                <th>restecg</th>
+                <th>thalach</th>
+                <th>exang</th>
+                <th>oldpeak</th>
+                <th>slope</th>
+                <th>ca</th>
+                <th>thal</th>
+                <th>Prediction</th>
+                <th>Timestamp</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in entries %}
+                <tr>    
+                <td>{{ entry.age}}</td>
+                <td>{{ entry.sex }}</td>
+                <td>{{ entry.cp}}</td>
+                <td>{{ entry.trestbps }}</td>
+                <td>{{ entry.chol}}</td>
+                <td>{{ entry.fbs }}</td>
+                <td>{{ entry.restecg}}</td>
+                <td>{{ entry.thalach }}</td>
+                <td>{{ entry.exang}}</td>
+                <td>{{ entry.oldpeak }}</td>
+                <td>{{ entry.slope}}</td>
+                <td>{{ entry.ca }}</td>
+                <td>{{ entry.thal }}</td>
+                <td>{{ heart_disease[entry.prediction|int] }}</td>
+                <td>{{ entry.predicted_on.strftime("%d %b %y %H:%M") }}</td>
+                <td>
+                    <form name="frmRemoveEntry" action="/remove" method="post" 
+                          novalidate>
+                    <input type="hidden" name="id" value="{{entry.id}}">
+                    <input type="submit" class="form-control btn-danger" 
+                           value="Remove">
+                    </form>
+                </td>
+                
+                </tr>
+            {% endfor %}
+            </tbody>
+    </table>
+</div>
+{% endblock %}
+
