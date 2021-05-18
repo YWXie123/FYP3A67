@@ -16,7 +16,7 @@ class SearchHist(db.Model):
  
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     staffid = db.Column(db.Integer, db.ForeignKey('staff.id'), nullable = False)
-    askedon = db.Column(db.DateTime, nullable = False)
+    asked_on = db.Column(db.DateTime, nullable = False)
     question = db.Column(db.String(200))
 
 class Answer(db.Model):
